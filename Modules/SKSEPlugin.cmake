@@ -9,10 +9,10 @@ Setup an SKSE Plugin.
   .. code-block:: cmake
 
     SKSEPlugin_Add(<target>
-                    [SOURCE_DIR <source dir>]
-                    [INCLUDE_DIR <include dir>]
-                    [SOURCES <sources>]
-                    [PRECOMPILE_HEADERS <precompile headers>])
+                   [SOURCE_DIR <source dir>]
+                   [INCLUDE_DIR <include dir>]
+                   [SOURCES <sources>]
+                   [PRECOMPILE_HEADERS <precompile headers>])
 
   This command will populate the variables ``SkyrimSE_PATH`` and ``SkyrimVR_PATH``
   with the installed paths of Skyrim Special Edition and Skyrim VR on the host
