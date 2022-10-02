@@ -193,7 +193,7 @@ function(SKSEPlugin_Add TARGET)
 	if(SKSE_USE_XBYAK)
 		find_package(xbyak CONFIG REQUIRED)
 		target_link_libraries("${TARGET}" PRIVATE xbyak::xbyak)
-		add_compile_definitions(SKSE_SUPPORT_XBYAK)
+		set(SKSE_SUPPORT_XBYAK ON CACHE BOOL "Enables trampoline support for Xbyak." FORCE)
 	endif()
 
 	if(NOT SKSE_COMMONLIBSSE_PATH)
