@@ -43,6 +43,8 @@ function(SKSEPlugin_Add TARGET)
 	set(multiValueArgs SOURCES PRECOMPILE_HEADERS)
 	cmake_parse_arguments(SKSE "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
+	include(CMakeDependentOption)
+
 	cmake_host_system_information(
 		RESULT SkyrimSE_PATH
 		QUERY WINDOWS_REGISTRY "HKLM/SOFTWARE/Bethesda Softworks/Skyrim Special Edition"
@@ -50,7 +52,7 @@ function(SKSEPlugin_Add TARGET)
 		VIEW 32
 	)
 
-	set(SkyrimSE_PATH ${SkyrimSE_PATH} PARENT_SCOPE)
+	set(SkyrimSE_PATH ${SkyrimSE_PATH} CACHE PATH "Installed path of Skyrim Special Edition.")
 
 	cmake_host_system_information(
 		RESULT SkyrimVR_PATH
@@ -59,13 +61,11 @@ function(SKSEPlugin_Add TARGET)
 		VIEW 32
 	)
 
-	set(SkyrimVR_PATH ${SkyrimVR_PATH} PARENT_SCOPE)
+	set(SkyrimVR_PATH ${SkyrimVR_PATH} CACHE PATH "Installed path of Skyrim VR.")
 
-	if(SKSE_SUPPORT_VR)
-		option(BUILD_SKYRIMVR "Build the mod for Skyrim VR" OFF)
-	endif()
+	cmake_dependent_option(BUILD_SKYRIMVR "Build for Skyrim VR." OFF SKSE_SUPPORT_VR OFF)
 
-	if(SKSE_SUPPORT_VR AND BUILD_SKYRIMVR)
+	if(BUILD_SKYRIMVR)
 		add_compile_definitions(SKYRIMVR)
 		set(GAME_DIR ${SkyrimVR_PATH})
 	else()
