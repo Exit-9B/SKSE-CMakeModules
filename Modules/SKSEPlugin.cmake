@@ -212,6 +212,10 @@ function(SKSEPlugin_Add TARGET)
 	)
 
 	if(NOT SKSE_NO_INSTALL)
+		if(CMAKE_GENERATOR MATCHES "Visual Studio")
+			option(CMAKE_VS_INCLUDE_INSTALL_TO_DEFAULT_BUILD "Include INSTALL target to default build." OFF)
+		endif()
+
 		if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 			set(CMAKE_INSTALL_PREFIX "${GAME_DIR}/Data" CACHE PATH
 				"Install path prefix (e.g. Skyrim Data directory or Mod Organizer virtual directory)."
