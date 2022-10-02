@@ -157,6 +157,12 @@ function(SKSEPlugin_Add TARGET)
 		@ONLY
 	)
 
+	target_sources(
+		"${TARGET}"
+		PRIVATE
+			${CMAKE_CURRENT_BINARY_DIR}/version.rc
+	)
+
 	target_include_directories(
 		"${TARGET}"
 		PRIVATE
